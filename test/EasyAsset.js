@@ -1,92 +1,90 @@
-const {expect} = require('chai');
-const {ethers} = require('hardhat')
+const { expect } = require('chai');
+const { ethers } = require('hardhat');
 
 describe('EasyAsset', () => {
-    let EasyAsset, contract,owner, buyerAddress, addr1
+    let EasyAsset, contract, owner, buyerAddress, addr1;
 
     // parameters for creating an Asset
-    const id = 0;
-    const title = "One bedroom Apartment ";
-    const description = " this is a description";
+    const title = "One bedroom Apartment";
+    const description = "this is a description";
     const credential = "https://github.com/lamsyA";
-    const timestamp = Date.now() + 3600 * 1000 * 24;
     const price = ethers.utils.parseEther("1");
 
     // parameters for buying an asset
+    const id = 0;
 
-
-beforeEach( async () => {
+    beforeEach(async () => {
         EasyAsset = await ethers.getContractFactory("EasyAsset");
         [owner, buyerAddress, addr1] = await ethers.getSigners();
-        // console.log("owner: " + owner.address);
-        contract = await EasyAsset.deploy( "EasyAsset", "EAS")
+        contract = await EasyAsset.deploy("EasyAsset", "EAS");
         await contract.deployed();
-    })
 
-describe(" Asset Creation ", () => {
-       beforeEach( async() => {
-          const b = await contract.createAsset(title,  description, credential, price)
-        //   console.log("bb ", b.address)
+        // Register and verify the buyerAddress
+        await contract._registerUser(25, 12345, "1234567890", "John");
+        await contract._verifyUser(25, 12345, "1234567890", "John");
 
-        })
-        it('should contain  list of  created Asset', async() => {
-            result = await contract.getAssets()
-            // console.log("bb->>>>>>>>>>>>>> ", result)
-            expect(result).to.have.length(1);
-            
-        })
-        beforeEach( async() => {
-            result = await contract.getAsset(id)
-            await contract.connect(buyerAddress).buyAsset(0, {
-                value: price
-              })
-            result = await contract.getBuyer(id) 
-            // console.log("get buyer", result)
-            expect(result.owner).to.be.eq(buyerAddress.address)
-            // expect(result.status).to.equal(1)
-        })
-        it('should  refund buyer', async() => {
-            result = await contract.getBuyer(id);
-            buyer =  await contract.connect(buyerAddress).refund(id);
- 
-             result = await contract.getAsset(id);
-            //  console.log("get buyer", buyer)
- 
- 
-            expect(buyer).to.emit(result.staus, buyer.status)
- 
-         })
-        it('should check the status of the Asset', async() => {
-           
-            result = await contract.getAsset(0) 
-            
-            expect(result.status).to.equal(1)
-        })
-        it('should check for the confirmation of the Asset', async() => {
-            // result = await contract.getBuyer(0)
-            // console.log("buyerAddress ",result)
-           result = await contract.connect(buyerAddress).confirm(0)
-            result = await contract.getAsset(0) 
-            // console.log("result", result)
-            expect(result.status).to.equal(4)
-        })
-       
-        it('should  probe asset', async() => {
-            // result = await contract.getBuyer(0);
-             const buyer = await contract.Probe(0, {from: owner.address});
-            result = await contract.getAsset(0);
-
-             expect(result.status).to.equal(2);
-            //  expect(result.refunded).to.equal(true);
-         })
-         it('should get the buyer of the asset', async() => {
-
-            result = await contract.getBuyer(id);
-            // console.log('list of buyer', result);
-
-             expect(result.owner).to.be.eq(buyerAddress.address);
-            //  expect(result.owner).to.equal(true);
-         })
+        await contract.connect(buyerAddress)._registerUser(25, 12345, "1234567890", "John");
+        await contract.connect(buyerAddress)._verifyUser(25, 12345, "1234567890", "John");
         
-     })
-})
+
+        await contract.createAsset(title, description, credential, price);
+            const result = await contract.getAssets();
+        
+    });
+
+    describe("Asset Creation", () => {
+        // it('should contain a list of created Asset', async () => {
+        //     // await contract.createAsset(title, description, credential, price);
+        //     // const result = await contract.getAssets();
+        //     expect(result).to.have.lengthOf(1);
+        // });   
+
+        it('should buy and refund buyer', async () => {
+            // await contract.createAsset(title, description, credential, price);
+            await contract.connect(buyerAddress).buyAsset(0, { value: price });
+
+            const buyerBeforeRefund = await contract.buyerMap(id);
+            expect(buyerBeforeRefund.status).to.equal(1);
+
+            await contract.connect(buyerAddress).refund(0);
+
+            const buyerAfterRefund = await contract.buyerMap(id);
+            expect(buyerAfterRefund.status).to.equal(3);
+        });
+
+        it('should check the status of the Asset', async () => {
+            // await contract.createAsset(title, description, credential, price);
+            const result = await contract.assetArray(id);
+            expect(result.status).to.equal(0);
+        });
+
+
+        it('should check for the confirmation of the Asset', async () => {
+            // await contract.createAsset(title, description, credential, price);
+            await contract.connect(buyerAddress).buyAsset(0, { value: price });
+            await contract.connect(buyerAddress).confirm(0);
+            const result = await contract.assetArray(id);
+            expect(result.status).to.equal(4);
+        });
+
+        it('should probe asset', async () => {
+            // await contract.createAsset(title, description, credential, price);
+            await contract.connect(owner).Probe(0);
+            const result = await contract.assetArray(id);
+            expect(result.status).to.equal(2);
+        });
+
+        it('should check the number of Assets', async () => {
+            // await contract.createAsset(title, description, credential, price);
+           const result = await contract.getAssets();
+            expect(result).to.have.lengthOf(1);
+        });
+
+        it('should get the buyer of the asset', async () => {
+            // await contract.createAsset(title, description, credential, price);
+            await contract.connect(buyerAddress).buyAsset(0, { value: price });
+            const result = await contract.buyerMap(id);
+            expect(result.owner).to.be.equal(buyerAddress.address);
+        });
+    });
+});

@@ -69,7 +69,7 @@ contract EasyAsset is ERC721, ReentrancyGuard {
         uint256 timestamp
     );
 
-    event sold(bool confirm, assetStatus status);
+    // event sold(bool confirm, assetStatus status);
 
      event Action(
         address buyer,
@@ -215,8 +215,8 @@ contract EasyAsset is ERC721, ReentrancyGuard {
     assetToProbe.probe = true;
 
     if (assetToProbe.status == assetStatus.PAID) {
-        buyer storage buyerToPay = buyerMap[id];
-        pay(buyerToPay.owner, assetToProbe.price);
+        // buyer storage buyerToPay = buyerMap[id];
+        pay(buyerMap[id].owner, assetToProbe.price);
     }
 
     assetToProbe.status = assetStatus.HELD;
@@ -276,7 +276,7 @@ contract EasyAsset is ERC721, ReentrancyGuard {
         );
          buyerToConfirm.status = assetStatus.SOLD;
 
-        emit sold(buyerToConfirm.checked, assetToConfirm.status);
+        // emit sold(buyerToConfirm.checked, assetToConfirm.status);
     }
     
 
