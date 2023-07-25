@@ -5,13 +5,18 @@ async function main() {
   const easyAsset = await EasyAsset.deploy("EassyAssetNFT", "EAT");
 
   await easyAsset.deployed();
-  
-  const gasEstimateCreateAsset = await easyAsset.estimateGas.createAsset("HJs", "qiuq","oqp", ethers.utils.parseEther("1"));
+
+  const gasEstimateCreateAsset = await easyAsset.estimateGas.createAsset(
+    "HJs",
+    "qiuq",
+    "oqp",
+    ethers.utils.parseEther("1")
+  );
   // console.log("Gas estimate for createAsset:", gasEstimateCreateAsset.toString());
-  
+
   // const gasEstimateGetAssets = await easyAsset.estimateGas.getAssets();
   // console.log("Gas estimate for getAssets:", gasEstimateGetAssets.toString());
-  
+
   // const gasEstimateGetBuyers = await easyAsset.estimateGas.getBuyers();
   // console.log("Gas estimate for getBuyers:", gasEstimateGetBuyers.toString());
 

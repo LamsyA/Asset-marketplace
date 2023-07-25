@@ -102,4 +102,3 @@ Users can interact with the contract to create assets, buy/sell assets, and requ
 
 1. Only the contract owner can probe an asset using the `Probe` function. This action releases the asset from being held and refunds the buyer if the asset was in the "PAID" status.
 2. The owner can release an asset that was previously held using the `releaseAsset` function.
-
