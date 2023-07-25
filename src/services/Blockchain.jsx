@@ -55,6 +55,30 @@ const getContract = async () => {
   }
 };
 
+const registerUser = async ({
+  _age,
+   _nationalId,
+  _phonenumber,
+  _firstName
+}) => {
+  try {
+    if (!ethereum) return alert("Please install Metamask");
+    const connectedAccount = getGlobalState("connectedAccount");
+    const contract = await getContract();
+    price = ethers.utils.parseEther(price);
+    const register = await contract.connect(connectedAccount)._registerUser(
+        _age,
+    _nationalId,
+    _phonenumber,
+    _firstName
+    );
+    console.log("Created Asset:", register);
+    return true;
+  } catch (error) {
+    reportError(error);
+  }
+};
+
 const addAsset = async ({ title, description, credential, price }) => {
   try {
     if (!ethereum) return alert("Please install Metamask");
@@ -73,6 +97,7 @@ const addAsset = async ({ title, description, credential, price }) => {
     reportError(error);
   }
 };
+
 
 const buyNewAsset = async ({ id, price }) => {
   console.log("id ", id, price);
@@ -297,4 +322,5 @@ export {
   ProbeAsset,
   ReleaseAsset,
   getNumAsset,
+  registerUser
 };

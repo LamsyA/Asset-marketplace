@@ -2,6 +2,7 @@ import Assets from "../component/Assets";
 import Hero from "../component/Hero";
 import HomeMintButton from "../component/HomeMintButton";
 import MintAsset from "../component/MintAsset";
+import RegisterUser from "../component/RegisterUser";
 import { useGlobalState } from "../store";
 
 const Home = () => {
@@ -21,6 +22,7 @@ const Home = () => {
       </div>
       <MintAsset />
       <HomeMintButton />
+      <RegisterUser/>
     </>
   );
 };

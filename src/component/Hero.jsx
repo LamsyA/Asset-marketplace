@@ -3,6 +3,7 @@ import { setGlobalState, useGlobalState } from '../store';
 
 const Hero = () => {
   const [showModal] = useGlobalState('showModal');
+  const [registerModal] = useGlobalState('registerModal');
   return (
     <div className="text-center bg-teal-50  py-32 px-5">
       <h1 className="text-xl md:text-2xl xl:text-3xl font-bold mb-12 tracking-tight ">
@@ -30,6 +31,16 @@ const Hero = () => {
         />
       </h2>
       <div className="flex justify-center">
+        <button
+          className=" inline-block mt-10 justify-center space bg-white px-5 py-2
+                    rounded-full text-yellow-600 shadow-md shadow-gray-900 hover:shadow-yellow-800 
+                    text-sm uppercase leading-tight border border-yellow-600"
+          onClick={() => setGlobalState('registerModal', 'scale-100')}
+        >
+          Register User
+        </button>
+        </div>
+        <div className="flex justify-center">
         <button
           className=" inline-block mt-10 justify-center space bg-white px-5 py-2
                     rounded-full text-yellow-600 shadow-md shadow-gray-900 hover:shadow-yellow-800 
