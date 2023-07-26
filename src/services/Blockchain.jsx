@@ -63,17 +63,42 @@ const registerUser = async ({
 }) => {
   try {
     if (!ethereum) return alert("Please install Metamask");
-    const connectedAccount = getGlobalState("connectedAccount");
+    // const connectedAccount = getGlobalState("connectedAccount");
     const contract = await getContract();
-    price = ethers.utils.parseEther(price);
-    const register = await contract.connect(connectedAccount)._registerUser(
+    const register = await contract._registerUser(
         _age,
     _nationalId,
     _phonenumber,
     _firstName
     );
     console.log("Created Asset:", register);
+    register.wait()
     return true;
+  } catch (error) {
+    reportError(error);
+  }
+};
+
+const verifyUser = async ({
+  _age,
+   _nationalId,
+  _phonenumber,
+  _firstName
+}) => {
+  try {
+    if (!ethereum) return alert("Please install Metamask");
+    // const connectedAccount = getGlobalState("connectedAccount");
+    const contract = await getContract();
+    const register = await contract._verifyUser(
+        _age,
+    _nationalId,
+    _phonenumber,
+    _firstName
+    );
+    console.log("Created Asset:", register);
+    register.wait()
+    return true;
+
   } catch (error) {
     reportError(error);
   }
@@ -113,7 +138,7 @@ const buyNewAsset = async ({ id, price }) => {
     console.log("Created Asset:", transaction);
     return true;
   } catch (error) {
-    reportError(error.message);
+    reportError(error);
   }
 };
 
@@ -165,7 +190,7 @@ const listAsset = async (id) => {
   try {
     if (!ethereum) return alert("Please install Metamask");
     const contract = await getContract();
-    const asset = await contract.getAsset(id);
+    const asset = await contract.assetArray(id);
     // console.log("asset", restructuredAssets([asset])[0])
     // setGlobalState('asset', asset)
     setGlobalState("asset", restructuredAssets([asset])[0]);
@@ -178,7 +203,7 @@ const listBuyers = async (id) => {
   try {
     if (!ethereum) return alert("Please install Metamask");
     const contract = await getContract();
-    const buyers = await contract.getBuyer(id);
+    const buyers = await contract.buyerMap(id);
     setGlobalState("buyers", restructuredBuyers([buyers])[0]);
     // console.log("list of Buyers:", restructuredBuyers([buyers])[0])
     return true;
@@ -231,17 +256,18 @@ const getOwner = async () => {
   }
 };
 
-const getNumAsset = async () => {
+const getVerify = async () => {
   try {
     if (!ethereum) return alert("Please install Metamask");
     const contract = await getContract();
-    const NumberOfAsset = await contract.NumAsset();
-    console.log("NumberOfAsset: ", NumberOfAsset);
-    const NumberOFBuyer = await contract.AssetBought();
+    const connectedAccount = getGlobalState("connectedAccount");
+    const verified = await contract.verified(connectedAccount);
+    console.log("verified: ", verified);
+    // const NumberOFBuyer = await contract.AssetBought();
     // console.log("refund ", owner.toLowerCase())
-    setGlobalState("owner", owner.toLowerCase());
-    setGlobalState("NumberOfAsset", NumberOfAsset.toNumber());
-    setGlobalState("NumberOFBuyer", NumberOFBuyer.toNumber());
+    setGlobalState("verified", verified);
+    // setGlobalState("NumberOfAsset", NumberOfAsset.toNumber());
+    // setGlobalState("NumberOFBuyer", NumberOFBuyer.toNumber());
     return true;
   } catch (error) {
     reportError(error.message);
@@ -321,6 +347,7 @@ export {
   getOwner,
   ProbeAsset,
   ReleaseAsset,
-  getNumAsset,
-  registerUser
+  registerUser,
+  verifyUser,
+  getVerify
 };

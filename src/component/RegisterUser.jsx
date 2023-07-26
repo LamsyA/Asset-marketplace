@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { useGlobalState, setGlobalState, setMsgLoading, setAlert } from '../store';
-import {  registerUser } from '../services/Blockchain';
+import {  registerUser, verifyUser } from '../services/Blockchain';
 
 const RegisterUser = () => {
   const [registerModal] = useGlobalState('registerModal');
@@ -27,6 +27,7 @@ const RegisterUser = () => {
       const newData = { _age: age, _nationalId: nationalId, _phonenumber: phonenumber, _firstName: firstName };
 
       const result = await registerUser(newData);
+    //   const 
       console.log(newData);
       if (result === true) {
         setAlert(`registeration Successfully ${firstName} ...`);
@@ -70,7 +71,7 @@ const RegisterUser = () => {
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
-            <p className="font-semibold">Add Asset</p>
+            <p className="font-semibold uppercase">Register</p>
             <button
               type="button"
               onClick={closeToggle}

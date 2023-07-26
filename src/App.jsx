@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import {
   getContract,
   getOwner,
+  getVerify,
   isWalletConnected,
   listAssets,
   listBuyers,
@@ -25,6 +26,7 @@ function App() {
       await getContract();
       await listAssets();
       await getOwner();
+      await getVerify()
     };
     loadData();
   }, []);

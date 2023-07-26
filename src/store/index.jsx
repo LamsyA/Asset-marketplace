@@ -19,6 +19,7 @@ const { setGlobalState, useGlobalState, getGlobalState } = createGlobalState({
   owner: "",
   NumberOfAsset: "",
   NumberOFBuyer: "",
+  verified: null
 });
 
 const setAlert = (msg, color = "green") => {
