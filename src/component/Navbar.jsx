@@ -8,40 +8,55 @@ const Navbar = () => {
   const [connectedAccount] = useGlobalState('connectedAccount');
   return (
     <header
-      className="flex justify-between items-center p-6 shadow-md
-         text-yellow-500 hover:text-yellow-400 fixed top-0 left-0 right-0
-         cursor-pointer bg-white shadow-blue-200  "
+      className="flex justify-between items-center p-4 shadow-md
+        fixed top-0 left-0 right-0 z-50
+        cursor-pointer bg-white shadow-sm shadow-blue-100 md:p-6"
     >
-      <Link
-        to="/"
-        className="flex justify-start items-center text-2xl
-            "
+      <div className="flex justify-start items-center 
+        text-2xl text-yellow-500 
+        hover:text-yellow-400 md:3xl
+        "
       >
-        <span>Easy </span>
-        <RiExchangeLine />
-        <span> Asset</span>
-      </Link>
+        <Link
+          to="/"
+          className="flex justify-start items-center"
+        >
+          <span>Easy </span>
+          <RiExchangeLine />
+          <span> Asset</span>
+        </Link>
+      </div>
 
       {connectedAccount ? (
         <div
-          className=" flex justify-center space bg-yellow-500 px-5 py-2
-                rounded-full text-white shadow-md shadow-lime-100 hover:shadow-gray-900 
-                hover:bg-yellow-600"
+          className="flex justify-center space text-xl"
         >
-          <button type="button" className="font-medium leading-tight  ">
+          <button 
+            type="button" 
+            className="font-medium leading-tight rounded-md text-white 
+            bg-yellow-500 px-2 py-2 shadow-md shadow-lime-100
+            uppercase text-base
+            transition ease-in duration-200
+            hover:bg-slate-100 
+            hover:text-black md:px-4
+            ">
             {' '}
             {connectedAccount.slice(0, 4) + '...' + connectedAccount.slice(-5)}
           </button>
         </div>
       ) : (
         <div
-          className=" flex justify-center space bg-yellow-500 px-5 py-2
-            rounded-full text-white shadow-md shadow-lime-100 hover:shadow-gray-900 
-            hover:bg-yellow-600"
+          className="flex justify-center space text-xl" 
         >
           <button
             type="button"
-            className="font-medium leading-tight uppercase "
+            className="font-medium leading-tight rounded-md text-white 
+            bg-yellow-500 px-2 py-2 shadow-md shadow-lime-100
+            uppercase text-base
+            transition ease-in duration-200
+            hover:bg-slate-100 
+            hover:text-black md:px-4
+            "
             onClick={connectWallet}
           >
             {' '}

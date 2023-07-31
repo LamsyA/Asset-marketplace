@@ -15,8 +15,8 @@ const Home = () => {
       <div className="flex justify-center items-center my-5 ">
         <button
           className=" inline-block justify-center space bg-yellow-500 px-5 py-2
-            rounded-full text-white shadow-md shadow-gray-900 hover:shadow-yellow-800 font-semibold
-            text-sm uppercase leading-tight border border-white"
+            rounded-md text-white hover:bg-slate-500 hover:text-black font-semibold
+            text-sm uppercase leading-tight border-none"
         >
           Load More
         </button>

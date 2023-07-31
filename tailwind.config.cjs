@@ -4,6 +4,19 @@ module.exports = {
   mode: "jit",
   darkMode: "class", // or 'media' or 'class'
   theme: {
+    screens: {
+      'sm': '320px',
+      // => @media (min-width: 640px) { ... }
+
+      'md': '480px',
+      // => @media (min-width: 768px) { ... }
+
+      'lg': '740px',
+      // => @media (min-width: 1024px) { ... }
+
+      'xl': '1020px',
+      // => @media (min-width: 1280px) { ... }
+    },
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
@@ -11,6 +24,7 @@ module.exports = {
     extend: {
       screens: {
         mf: "990px",
+        md: "480px",
       },
       keyframes: {
         "slide-in": {
