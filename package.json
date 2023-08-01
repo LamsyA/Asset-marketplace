@@ -27,6 +27,7 @@
     "react-hooks-global-state": "^2.1.0",
     "react-icons": "^4.7.1",
     "react-router-dom": "^6.4.5",
+    "react-slick": "^0.29.0",
     "react-toastify": "^9.1.1",
     "recharts": "^2.2.0",
     "solc": "^0.8.19",

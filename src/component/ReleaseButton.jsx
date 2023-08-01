@@ -85,7 +85,7 @@ const ReleaseButton = ({ asset, buyers }) => {
             onClick={handleRelease}
           >
             {' '}
-            Probe Asset
+            Release Asset
           </button>
         </div>
       </div>

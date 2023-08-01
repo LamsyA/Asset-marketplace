@@ -14,6 +14,7 @@ import {
   listAssets,
   listBuyers,
 } from "./services/Blockchain";
+import Footer from "./component/Footer";
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -32,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative bg-teal-50">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -40,6 +41,7 @@ function App() {
       </Routes>
       <Alert />
       <Loader />
+      <Footer />
     </div>
   );
 }

@@ -1,4 +1,6 @@
+import AssetInstructions from "../component/AssetInstruction";
 import Assets from "../component/Assets";
+import Footer from "../component/Footer";
 import Hero from "../component/Hero";
 import HomeMintButton from "../component/HomeMintButton";
 import MintAsset from "../component/MintAsset";
@@ -10,7 +12,8 @@ const Home = () => {
   const [assets] = useGlobalState("assets");
   return (
     <>
-      <Hero />
+    <div className="bg-teal-50">
+    <Hero />
       <Assets assets={assets} />
       <div className="flex justify-center items-center my-5 ">
         <button
@@ -25,6 +28,10 @@ const Home = () => {
       <HomeMintButton />
       <RegisterUser/>
       <VerifyUser/>
+      <AssetInstructions/>
+      {/* <Footer /> */}
+    </div>
+     
     </>
   );
 };
