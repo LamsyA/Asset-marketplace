@@ -1,13 +1,13 @@
 import abi from "../abis/contracts/EasyAsset.sol/EasyAsset.json";
-// import address from '../abis/contractAddress.json'
+import address from '../../contract-address.json'
 import { getGlobalState, setGlobalState } from "../store";
 import { ethers } from "ethers";
 
 const { ethereum } = window;
-// const contractAddress =  address.address
+const contractAddress =  address.address
 const contractAbi = abi.abi;
 
-const contractAddress = import.meta.env.VITE_INFURA_CONTRACT_ADDRESS;
+// const contractAddress = import.meta.env.VITE_INFURA_CONTRACT_ADDRESS;
 const connectWallet = async () => {
   try {
     if (!ethereum) return alert("Wallet not found");

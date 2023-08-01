@@ -1,5 +1,6 @@
 import Typewriter from 'typewriter-effect';
 import { setGlobalState, useGlobalState } from '../store';
+import { MdVerified } from 'react-icons/md';
 
 const Hero = () => {
   const [showModal] = useGlobalState('showModal');
@@ -25,12 +26,31 @@ const Hero = () => {
           {/* Image Card */}
           <div className="w-full md:w-1/3 bg-white p-5 rounded-lg shadow-lg hover:shadow-black mb-6 md:mr-6">
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxTKOmEVhMssjZ_gY9xINttr90NgPazzFt8A&usqp=CAU"
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaBRUvybfRYaA8nNTmV9LGJJ1UMfgB4i3AFQ&usqp=CAU"
               alt="NFT ASSET"
               className="h-64 w-full object-cover rounded-lg"
             />
-            <div className="flex justify-center items-center mt-3 text-sm md:text-md xl:text-sm font-bold text-teal-500">
-              @0x034..09e1f
+            <div className="flex justify-between items-center mt-3 text-sm md:text-md xl:text-sm font-bold text-teal-500">
+              <div className='flex'>
+              owner: {" "}
+             <p className='text-black'>
+             @0x034..09e1f
+             </p>
+              </div>
+             
+             <div className='flex'>
+             <p className='text-black'>
+             verified
+             </p>
+             <MdVerified className="text-green-500" size={20} />
+             </div>
+             <div className='flex text-red-700'>
+             <p className='text-black'>
+             Price:
+             </p>
+             5TH
+             </div>
+            
             </div>
           </div>
 
