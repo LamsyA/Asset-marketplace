@@ -1,6 +1,5 @@
 import Assets from "../component/Assets";
 import Hero from "../component/Hero";
-import HomeMintButton from "../component/HomeMintButton";
 import MintAsset from "../component/MintAsset";
 import RegisterUser from "../component/RegisterUser";
 import VerifyUser from "../component/verify";
@@ -12,7 +11,9 @@ const Home = () => {
     <>
       <Hero />
       <Assets assets={assets} />
-      <div className="flex justify-center items-center my-5 ">
+      {
+        assets.length > 0 ?
+        <div className="flex justify-center items-center my-5 ">
         <button
           className=" inline-block justify-center space bg-yellow-500 px-5 py-2
             rounded-md text-white hover:bg-slate-500 hover:text-black font-semibold
@@ -21,8 +22,10 @@ const Home = () => {
           Load More
         </button>
       </div>
+      : null
+      }
+
       <MintAsset />
-      <HomeMintButton />
       <RegisterUser/>
       <VerifyUser/>
     </>

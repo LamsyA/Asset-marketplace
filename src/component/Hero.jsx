@@ -1,5 +1,6 @@
 import Typewriter from 'typewriter-effect';
 import { setGlobalState, useGlobalState } from '../store';
+import HomeMintButton from "../component/HomeMintButton"
 
 const Hero = () => {
   const [showModal] = useGlobalState('showModal');
@@ -8,8 +9,8 @@ const Hero = () => {
 
   console.log('verified', verified);
   return (
-    <div className="text-center bg-teal-50 h-screen py-32 px-5">
-      <h1 className="text-xl md:text-2xl xl:text-3xl font-bold mb-12 tracking-tight ">
+    <div className="relative text-center bg-teal-50 h-screen py-32 px-5">
+      <h1 className="text-xl text-slate-700 md:text-2xl xl:text-3xl font-bold mb-12 tracking-tight ">
         <span className="xl:text-3xl capitalize mb-5 ">
           {' '}
           Looking for a new way to showcase and sell your assets?{' '}
@@ -58,9 +59,9 @@ const Hero = () => {
         <button
           className="
           inline-block mt-10 justify-center space bg-white px-5 py-2
-          rounded-md text-yellow-600 shadow-md hover:border-white 
-          text-sm uppercase leading-tight
-          transition ease-in duration-200
+          rounded-md shadow-md font-bold
+          text-sm uppercase text-yellow-600 leading-tight
+          transition ease-in duration-200 hover:border-white 
           border border-yellow-600
           "
           onClick={() => setGlobalState('registerModal', 'scale-100')}
@@ -71,22 +72,29 @@ const Hero = () => {
       )}
       
         
-      <div className="flex justify-center items-center mt-10">
+      <div className="flex justify-center items-center mt-10 font-bold text-slate-700">
         <div
-          className="flex flex-col justify-center items-center bg-teal-50 
-                h-20 border  shadow-md  w-full"
+          className="
+          flex flex-col justify-center items-center 
+          bg-slate-50
+          h-20 border border-white shadow-md  w-full"
         >
           <span className="text-yellow-500 font-bold text-lg leading-5"> {0} </span>
           <span>Assets </span>
         </div>
         <div
-          className="flex flex-col justify-center items-center bg-teal-50 
+          className="flex flex-col justify-center items-center bg-slate-50 
                 h-20 border border-white shadow-md  w-full"
         >
           <span className="text-yellow-500 font-bold text-lg leading-5"> {0} </span>
           <span>Buyers </span>
         </div>
       </div>
+      {
+        verified ? (
+          <HomeMintButton />
+        ) : null
+      }
     </div>
   );
 };

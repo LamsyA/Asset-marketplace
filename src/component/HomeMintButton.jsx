@@ -5,16 +5,17 @@ import { setGlobalState } from '../store';
 const HomeMintButton = () => {
   return (
     <div
-      className="fixed right-10 bottom-10 flex space-x-2 
+      className="absolute right-10 bottom-10 flex space-x-2 
              justify-center"
     >
       <button
-        className="flex  justify-center items-center  mt-10  bg-yellow-500 
-            w-9 h-9 rounded-full text-white shadow-md shadow-gray-900 
-            hover:shadow-red-600  text-sm uppercase leading-tight border "
+        className="flex justify-center items-center mt-10 bg-blue-400 
+            rounded-md text-white shadow-md shadow-gray-500 
+            px-4 py-2 transition ease-in duration-200
+            hover:bg-blue-200 hover:text-slate-700 text-bold leading-tight border-none "
         onClick={() => setGlobalState('showModal', 'scale-100')}
       >
-        <BsPlusLg className="font-bold" size={20} />
+        Add Asset {" "} <BsPlusLg className="" size={20} />
       </button>
     </div>
   );
