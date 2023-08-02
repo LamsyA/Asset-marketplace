@@ -66,8 +66,8 @@ const RegisterUser = () => {
         transition-transform duration-300 ${registerModal}`}
     >
       <div
-        className="bg-white shadow-xl shadow-black w-11/12 md:w-2/5
-            h-7/12 p-6 rounded-xl"
+        className="bg-white shadow-md shadow-slate w-11/12 md:w-2/5
+            h-7/12 p-6 rounded-md"
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
@@ -83,7 +83,7 @@ const RegisterUser = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300 p-2 
-                    rounded-xl mt-5"
+                    rounded-md mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
@@ -98,7 +98,7 @@ const RegisterUser = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300 p-2 
-                    rounded-xl mt-5"
+                    rounded-md mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
@@ -113,7 +113,7 @@ const RegisterUser = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300 p-2 
-                    rounded-xl mt-5"
+                    rounded-md mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
@@ -130,7 +130,7 @@ const RegisterUser = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300 p-2 
-                    rounded-xl mt-5"
+                    rounded-md mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
@@ -146,9 +146,11 @@ const RegisterUser = () => {
             />
           </div>
           <button
-            className=" flex justify-center items-center
-                                shadow-lg shadow-black text-white bg-yellow-500
-                                hover:bg-yellow-800 rounded-full mt-5 p-2 uppercase "
+            className="
+            flex justify-center items-center
+            shadow-md shadow-slate-500 text-white bg-yellow-500
+            transition ease-in duration-200
+            hover:bg-yellow-800 rounded-md text-bold mt-5 p-2 uppercase"
           >
             {' '}
             Submit
