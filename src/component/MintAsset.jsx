@@ -88,13 +88,18 @@ const MintAsset = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen flex
-        items-center justify-center bg-black bg-opacity-50 transform 
+      className={`fixed top-0 left-0 bottom-0
+        w-screen h-screen flex
+        items-center justify-center
+        pt-16
+        bg-black bg-opacity-20 backdrop-blur-md
+        font-poppins text-white
+        transform 
         transition-transform duration-300 ${showModal}`}
     >
       <div
-        className="bg-white shadow-xl shadow-black w-11/12 md:w-2/5
-            h-7/12 p-6 rounded-xl"
+        className="bg-[#101010] w-11/12 md:w-2/5
+        md:h-7/12 p-6 rounded-md"
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
@@ -108,26 +113,17 @@ const MintAsset = () => {
               <FaTimes />
             </button>
           </div>
-          <div className="flex justify-center items-center mt-5">
-            <div className="rounded-xl overflow-hidden h-20 w-20">
-              <img
-                src={imgUpload || imgUrl}
-                alt="Asset title"
-                className="rounded-xl h-full object-cover w-full cursor-pointer "
-              />
-            </div>
-          </div>
           <div
             className="flex justify-between items-center bg-gray-300
-                                rounded-xl mt-5"
+            rounded-md mt-5"
           >
             <label className="block">
               <span className="sr-only">Choose Image item</span>
               <input
                 className="block w-full text-sm text-slate-500 file:mr-4
-                                  file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm
-                                   hover:file:bg-[#c4e631] file:font-semibold focus:outline-none
-                                   cursor-pointer focus:ring-0"
+                          file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm
+                          hover:file:bg-[#101010] file:font-semibold focus:outline-none
+                          cursor-pointer focus:ring-0"
                 type="file"
                 accept="image/png, image/gif, image/webp, image/jpeg, image/jpg"
                 onChange={changeImage}
@@ -152,11 +148,11 @@ const MintAsset = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300 p-2 
-                    rounded-xl mt-5"
+                    rounded-md mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
-                        text-slate-500 focus:outline-none focus:ring-0"
+                        text-slate-700 focus:outline-none focus:ring-0"
               type="number"
               placeholder="Price (ETH)"
               name="price"
@@ -169,12 +165,12 @@ const MintAsset = () => {
           </div>
           <div
             className="flex justify-between items-center bg-gray-300
-                            rounded-xl mt-5"
+                            rounded-md mt-5"
           >
             <textarea
               className="block w-full text-sm text-slate-500 bg-gray-300
-                                focus:outline-none focus:ring-0 p-2
-                                 bg-transparent border-0 h-20 resize-none"
+                    focus:outline-none focus:ring-0 p-2
+                      bg-transparent border-0 h-20 resize-none"
               type="text"
               placeholder="Description"
               name="description"
@@ -185,8 +181,10 @@ const MintAsset = () => {
           </div>
           <button
             className=" flex justify-center items-center
-                                shadow-lg shadow-black text-white bg-yellow-500
-                                hover:bg-yellow-800 rounded-full mt-5 p-2 uppercase "
+            text-white bg-purple-600
+            rounded-md mt-5 p-2 
+            transition-transform duration-300 
+            hover:bg-purple-800"
           >
             {' '}
             Mint Asset
