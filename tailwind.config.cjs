@@ -7,8 +7,6 @@ module.exports = {
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
-      "poppins": ['Poppins', "sans-serif"],
-      "kanit": ['Kanit', "sans-serif"],
     },
     extend: {
       screens: {
