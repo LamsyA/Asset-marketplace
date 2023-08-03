@@ -61,16 +61,13 @@ const RegisterUser = () => {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-screen h-screen 
-        flex items-center justify-center 
-        bg-black bg-opacity-20 backdrop-blur-md
-        transform
-        font-poppins text-white
+      className={`fixed top-0 left-0 w-screen h-screen flex
+        items-center justify-center bg-black bg-opacity-50 transform 
         transition-transform duration-300 ${registerModal}`}
     >
       <div
-        className="bg-[#101010] shadow-md shadow-black w-11/12 md:w-2/5
-            h-7/12 p-6 rounded-md"
+        className="bg-white shadow-xl shadow-black w-11/12 md:w-2/5
+            h-7/12 p-6 rounded-xl"
       >
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="flex justify-between items-center">
@@ -85,12 +82,12 @@ const RegisterUser = () => {
             </button>
           </div>
           <div
-            className="flex justify-between items-center bg-white p-2 
-                    rounded-md mt-5"
+            className="flex justify-between items-center bg-gray-300 p-2 
+                    rounded-xl mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
-                        text-slate-700 focus:outline-none focus:ring-0 text-center"
+                        text-slate-500 focus:outline-none focus:ring-0 text-center"
               type="text"
               placeholder="Enter your first name"
               name="firstName"
@@ -100,12 +97,12 @@ const RegisterUser = () => {
             />
           </div>
           <div
-            className="flex justify-between items-center bg-white p-2 
-                    rounded-md mt-5"
+            className="flex justify-between items-center bg-gray-300 p-2 
+                    rounded-xl mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
-                        text-slate-700 focus:outline-none focus:ring-0 text-center"
+                        text-slate-500 focus:outline-none focus:ring-0 text-center"
               type="number"
               placeholder="Enter your age"
               name="age"
@@ -115,12 +112,12 @@ const RegisterUser = () => {
             />
           </div>
           <div
-            className="flex justify-between items-center bg-white p-2 
-                    rounded-md mt-5"
+            className="flex justify-between items-center bg-gray-300 p-2 
+                    rounded-xl mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
-                        text-slate-700 focus:outline-none focus:ring-0 text-center"
+                        text-slate-500 focus:outline-none focus:ring-0 text-center"
               type="text"
               placeholder="Enter your National Identity Number"
               name="nationalId"
@@ -132,12 +129,12 @@ const RegisterUser = () => {
             />
           </div>
           <div
-            className="flex justify-between items-center bg-white p-2 
-                    rounded-md mt-5"
+            className="flex justify-between items-center bg-gray-300 p-2 
+                    rounded-xl mt-5"
           >
             <input
               className="block w-full bg-transparent border-0 text-sm
-                        text-slate-700 focus:outline-none focus:ring-0
+                        text-slate-500 focus:outline-none focus:ring-0
                         text-center"
               type="number"
               placeholder="Enter your Phone Number"
@@ -150,9 +147,8 @@ const RegisterUser = () => {
           </div>
           <button
             className=" flex justify-center items-center
-                        shadow-md shadow-black text-white bg-purple-600
-                        transition duration-200 ease-in
-                        hover:bg-purple-800 rounded-md mt-5 p-2"
+                                shadow-lg shadow-black text-white bg-yellow-500
+                                hover:bg-yellow-800 rounded-full mt-5 p-2 uppercase "
           >
             {' '}
             Submit

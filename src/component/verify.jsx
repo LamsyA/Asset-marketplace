@@ -12,7 +12,6 @@ const VerifyUser = () => {
   const [nationalId, setNationalId] = useState('');
   const [loading, setLoading] = useState(false);
   const [userDetails, setUserDetails] = useState(null);
-  const [isOpen, setIsOpen] = useState(false)
   const [error, setError] = useState(null);
 
   const handleVerify = async () => {
@@ -58,8 +57,7 @@ const VerifyUser = () => {
   };
 
   const closeToggle = () => {
-    setIsOpen(!isOpen)
-    //setGlobalState('verifyModal', 'scale-0');
+    setGlobalState('verifyModal', 'scale-0');
     // resetForm();
   };
 
@@ -105,18 +103,13 @@ const VerifyUser = () => {
 
    
     <div
-      className={isOpen ? `fixed top-0 left-0 w-screen h-screen flex
-        items-center justify-center 
-        bg-black bg-opacity-20 backdrop-blur-md
-        transform
-        font-poppins text-white
-        transition-transform duration-300${verifyModal}` 
-        : `hidden`
-      }
+      className={`fixed top-0 left-0 w-screen h-screen flex
+        items-center justify-center bg-black bg-opacity-50 transform 
+        transition-transform duration-300 ${verifyModal}`}
     >
          <div
-        className="bg-[#101010] shadow-md shadow-black w-11/12 md:w-2/5
-            h-7/12 p-6 rounded-md"
+        className="bg-white shadow-xl shadow-black w-11/12 md:w-2/5
+            h-7/12 p-6 rounded-xl"
       >
         
         <div className="flex flex-col "> 
@@ -132,8 +125,8 @@ const VerifyUser = () => {
             </button>
           </div>
           <div
-            className="flex justify-between items-center bg-white p-2 
-                    rounded-md mt-5"
+            className="flex justify-between items-center bg-gray-200 p-2 
+                    rounded-xl mt-5"
           >
         <input
          type='number'
@@ -146,12 +139,10 @@ const VerifyUser = () => {
          />
          </div>
         <button className='flex justify-center items-center
-                          shadow-lg shadow-black text-white bg-purple-600
-                          hover:bg-purple-800 rounded-md mt-5 p-2 uppercase'
+                                shadow-lg shadow-black text-white bg-yellow-500
+                                hover:bg-yellow-800 rounded-full mt-5 p-2 uppercase '
                                 onClick={handleVerify}>
-          {
-            loading ? "Loading..." : "Verify"
-          }
+          Verify
         </button>
     </div>
     </div>
