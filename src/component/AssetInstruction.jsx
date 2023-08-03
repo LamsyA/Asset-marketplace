@@ -2,12 +2,15 @@ import React from 'react';
 
 const AssetInstructions = () => {
   return (
-    <div className="flex justify-between items-center">
-      <div className="flex flex-col py-8 px-4">
-        <div className="mx-auto bg-lime-100 rounded-lg p-4 transition duration-300 ease-in-out  hover:scale-105
-        hover:bg-emerald-100">
-          <h2 className=" flex items-center justify-center text-2xl font-bold mb-4 bg-yellow-500 rounded-md p-2
-           transition duration-300 ease-in-out hover:bg-yellow-600 hover:text-white cursor-pointer">
+    <div className="relative w-full bg-black font-poppins
+                  text-white
+                  flex flex-col justify-between items-center">
+      <div className="flex flex-col py-4 md:py-8 px-4
+                      md:w-1/2">
+        <div className="mx-auto bg-[#101010] rounded-md p-4 transition duration-300 ease-in-out  
+                        hover:scale-105">
+          <h2 className=" flex items-center justify-center text-2xl font-bold mb-4 rounded-md p-2
+           transition duration-300 ease-in-out cursor-pointer">
             How to Create an Asset
           </h2>
           <div className="flex justify-center items-center">
@@ -28,11 +31,14 @@ const AssetInstructions = () => {
         </div>
       </div>
 
-      <div className="flex flex-col py-8 px-4">
-        <div className="bg-lime-100 rounded-lg p-4 transition duration-300 ease-in-out hover:scale-105
-        hover:bg-emerald-100">
-          <h2 className="flex items-center justify-center text-2xl font-bold mb-4 bg-yellow-500 rounded-md p-2
-           transition duration-300 ease-in-out hover:bg-yellow-600 hover:text-white cursor-pointer">
+      <div className="flex flex-col py-4 md:py-8 px-4
+                      md:w-1/2">
+        <div className="mx-auto bg-[#101010] rounded-md p-4 transition duration-300 ease-in-out  
+                        hover:scale-105">
+          <h2 className="
+          flex items-center justify-center text-2xl font-bold mb-4 rounded-md p-2
+           transition duration-300 ease-in-out 
+           cursor-pointer">
             How to Buy an Asset
           </h2>
           <ul className="list-decimal pl-4 text-start items-center">
