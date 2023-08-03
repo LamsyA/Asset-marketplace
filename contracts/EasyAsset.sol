@@ -48,8 +48,6 @@ contract EasyAsset is ERC721, ReentrancyGuard {
     mapping(string => bool) private AssetExist;
     mapping(uint256 => buyer) private refundedBuyers;
     mapping(uint256 => buyer) public  buyerMap;
-    mapping(uint256 => user) public  usersDetail;
-    mapping (address => bool) public  verified;
     Asset[] public  assetArray;
 
 
@@ -93,55 +91,6 @@ contract EasyAsset is ERC721, ReentrancyGuard {
     }
 
 
-    function _registerUser(
-    uint256 _age,
-    uint256 _nationalId,
-    string calldata _phonenumber,
-    string calldata _firstName
-    ) public  {
-    require(!verified[msg.sender], "You are already verified");
-
-
-    usersDetail[_nationalId] = user({
-        age: _age,
-        nationalId: _nationalId,
-        phonenumber: _phonenumber,
-        firstName: _firstName
-        
-    });
-
-    verified[msg.sender] = false;
-}
-
-    function _verifyUser(
-        uint256 _age,
-        uint256 _nationalId,
-        string calldata _phonenumber,
-        string calldata _firstName
-    ) public   {
-    // require(!verified[msg.sender], "You are already verified");
-
-
-    user storage userdetails = usersDetail[_nationalId]; 
-
-    require(userdetails.nationalId == _nationalId, "User not found or data mismatch");
-    require(
-        keccak256(bytes(userdetails.phonenumber)) == keccak256(bytes(_phonenumber)) &&
-        keccak256(bytes(userdetails.firstName)) == keccak256(bytes(_firstName)) &&
-        userdetails.age == _age && userdetails.age >= 18,
-        "Verification failed"
-    );
-
-    verified[msg.sender] = true;
-    }
-
-
-
-     modifier isVerified {
-        require(verified[msg.sender] == true , "You are noy verified");
-        _;
-    }
-
     function createAsset(
         
         string calldata title,
@@ -149,8 +98,8 @@ contract EasyAsset is ERC721, ReentrancyGuard {
         string calldata credential,
         uint256 price
         
-    ) public isVerified  returns (bool) {
-        require(verified[msg.sender] == true && !AssetExist[credential] , "You are noy verified");
+    ) public   returns (bool) {
+        require( !AssetExist[credential] , "Asset already exist");
 
        
 
@@ -174,8 +123,7 @@ contract EasyAsset is ERC721, ReentrancyGuard {
     require( assetToBuy.status == assetStatus.OPEN, " Asset is undergoing Negotiation");
     require(msg.sender != assetToBuy.seller&& msg.value == assetToBuy.price, 
         "You cannot buy your Asset or Incorrect payment amount ");
-    require(verified[msg.sender] == true && AssetIdExist[id], "you are not verified");
-    // require(msg.value == assetToBuy.price, "Incorrect payment amount");
+   
 
     buyer memory newBuyer = buyer(assetStatus.PAID,id,  msg.value, block.timestamp, true, false, msg.sender,"");
     buyerMap[id] = newBuyer;
@@ -221,10 +169,7 @@ contract EasyAsset is ERC721, ReentrancyGuard {
 
     assetToProbe.status = assetStatus.HELD;
 }
-    // function checked(uint id) public {
-    //     require(!buyerMap[id].checked && buyerMap[id].owner == msg.sender, "you are not the buyer");
-    //     buyerMap[id].checked = true;
-    // }
+    
 
     function releaseAsset(uint256 id) public {
         Asset storage assetToProbe = assetArray[id];

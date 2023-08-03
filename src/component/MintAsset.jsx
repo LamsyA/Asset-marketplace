@@ -84,7 +84,7 @@ const MintAsset = () => {
     setPrice('');
   };
   const imgUrl =
-    'https://media.wired.com/photos/5926e641f3e2356fd800ad1d/master/w_2560%2Cc_limit/AnkiTA.jpg';
+    'https://pony.studio/design-for-growth/wp-content/uploads/2022/03/hape-beast.jpg';
 
   return (
     <div
@@ -92,13 +92,13 @@ const MintAsset = () => {
         w-screen h-screen flex
         items-center justify-center
         pt-16
-        bg-black bg-opacity-20 backdrop-blur-md
+        bg-gray-600 bg-opacity-20 backdrop-blur-md
         font-poppins text-white
         transform 
         transition-transform duration-300 ${showModal}`}
     >
       <div
-        className="bg-[#101010] w-11/12 md:w-2/5
+        className="bg-[#1d283e] w-11/12 md:w-2/5
         md:h-7/12 p-6 rounded-md"
       >
         <form onSubmit={handleSubmit} className="flex flex-col">

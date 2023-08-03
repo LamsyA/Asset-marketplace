@@ -4,7 +4,7 @@ import { MdReport, MdVerified } from 'react-icons/md';
 
 const Assets = ({ assets }) => {
   return (
-    <div className="flex flex-col px-6 bg-teal-50">
+    <div className="flex flex-col px-6 bg-gray-800">
       <div className="flex justify-center items-center flex-wrap">
         {assets.map((asset, i) => (
           <AssetCard key={i} asset={asset} />
@@ -15,12 +15,12 @@ const Assets = ({ assets }) => {
 };
 
 const AssetCard = ({ asset }) => (
-  <div id="assets" className="rounded-lg shadow-lg bg-white w-64 m-4 hover:shadow-red-300">
+  <div id="assets" className="rounded-lg shadow-lg bg-white w-64 m-4 hover:shadow-teal-300">
     <Link to={'/assets/' + asset.id}>
       <img
         src={
           asset.credential ||
-          'https://media.wired.com/photos/5926e641f3e2356fd800ad1d/master/w_2560%2Cc_limit/AnkiTA.jpg'
+          'https://pony.studio/design-for-growth/wp-content/uploads/2022/03/hape-beast.jpg'
         }
         alt={asset.title}
         className="rounded-xl h-64 w-full object-cover"

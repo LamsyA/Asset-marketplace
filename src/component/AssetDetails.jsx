@@ -17,7 +17,7 @@ const AssetDetails = ({ asset, buyers }) => {
           <img
             src={
               asset?.credential ||
-              'https://media.wired.com/photos/5926e641f3e2356fd800ad1d/master/w_2560%2Cc_limit/AnkiTA.jpg'
+              'https://pony.studio/design-for-growth/wp-content/uploads/2022/03/hape-beast.jpg'
             }
             alt={asset?.title}
             className="rounded-xl h-64 object-cover w-full sm:w-1/3 "
