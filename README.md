@@ -4,6 +4,8 @@
 
 EasyAsset is a decentralized application (DApp) implemented as a Solidity smart contract on the Ethereum blockchain. It facilitates the creation, buying, and selling of assets represented as non-fungible tokens (NFTs). The contract inherits from OpenZeppelin's ERC721 standard for NFTs and also uses the ReentrancyGuard contract to prevent reentrancy attacks.
 
+The contract takes in the payment as an escrow that allow buyer to confirm the Asset before payment is send to the assset owner and the asset ownership is transfer to the buyer once the buyer confirms the asset.  
+
 ## License
 
 This contract is licensed under the MIT License. Please refer to the SPDX-License-Identifier comment at the top of the source code for more details.
@@ -14,13 +16,15 @@ This contract is licensed under the MIT License. Please refer to the SPDX-Licens
 
 1. Asset Creation: Users can create new assets (represented as NFTs) and associate them with a title, description, price, and a unique credential. The credential acts as a unique identifier for each asset.
 
-2. Asset Buying: Users can buy assets by sending the specified price in Ether to the contract. Once the payment is made, the asset status changes to "PAID," and ownership is transferred to the buyer.
+2. Asset Buying: Users can buy assets by sending the specified price in Ether to the contract. Once the payment is made, the asset status changes to "PAID," 
 
-3. Asset Refund: The buyer of an asset can request a refund before the asset status changes to "SOLD." The contract owner has the authority to approve refunds, releasing the asset back to the original seller.
+3. Asset Refund: The buyer of an asset can request a refund before the asset status changes to "SOLD." the asset status changes to "OPEN," 
 
 4. Asset Holding: The contract owner can "probe" an asset, putting it on hold. While an asset is on hold, it cannot be bought or sold.
 
 5. Asset Release: The contract owner can release an asset from holding, making it available for buying or selling.
+
+5. Asset Confirm: The buyer of an asset needs to confirm the asset for transfer of ownership to take place and the fund is release to the asset seller. This process ensure on-chain transfer of ownership to buyer from the asset owner.
 
 ### Data Structures
 
@@ -56,7 +60,7 @@ The contract constructor initializes the ERC721 token with a name and symbol and
 
 2. `buyAsset`: Allows users to buy an asset by providing the asset ID and sending the required payment. The asset status changes to "PAID," and ownership transfers to the buyer.
 
-3. `refund`: Allows the buyer of an asset to request a refund. The contract owner has the authority to approve the refund, releasing the asset back to the original seller.
+3. `refund`: Allows the buyer of an asset to request a refund.  releasing the asset back to the original seller.
 
 4. `Probe`: Allows the contract owner to put an asset on hold, making it unavailable for buying or selling.
 
