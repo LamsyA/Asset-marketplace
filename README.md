@@ -1,104 +1,132 @@
-# EasyAsset Contract Documentation
+# EasyAsset Smart Contract Documentation
 
 ## Overview
 
-The EasyAsset contract is an Ethereum smart contract that allows users to create, buy, and sell assets in a decentralized manner. It is built on the Ethereum blockchain and follows the ERC-721 standard for non-fungible tokens (NFTs). The contract also includes functionality for user verification and asset management.
+EasyAsset is a decentralized application (DApp) implemented as a Solidity smart contract on the Ethereum blockchain. It facilitates the creation, buying, and selling of assets represented as non-fungible tokens (NFTs). The contract inherits from OpenZeppelin's ERC721 standard for NFTs and also uses the ReentrancyGuard contract to prevent reentrancy attacks.
 
-## Contract Details
+## License
 
-### SPDX-License-Identifier
+This contract is licensed under the MIT License. Please refer to the SPDX-License-Identifier comment at the top of the source code for more details.
 
-The contract starts with a SPDX-License-Identifier comment to indicate the license under which the contract is released. In this case, it uses the MIT license.
+## Smart Contract Details
 
-### Pragma
+### Contract Features
 
-```
-pragma solidity ^0.8.0;
-```
+1. Asset Creation: Users can create new assets (represented as NFTs) and associate them with a title, description, price, and a unique credential. The credential acts as a unique identifier for each asset.
 
-This statement specifies the version of the Solidity programming language required by the contract. In this case, the contract requires Solidity version 0.8.0 or higher.
+2. Asset Buying: Users can buy assets by sending the specified price in Ether to the contract. Once the payment is made, the asset status changes to "PAID," and ownership is transferred to the buyer.
 
-### Libraries
+3. Asset Refund: The buyer of an asset can request a refund before the asset status changes to "SOLD." The contract owner has the authority to approve refunds, releasing the asset back to the original seller.
 
-The contract imports two external libraries using OpenZeppelin contracts:
+4. Asset Holding: The contract owner can "probe" an asset, putting it on hold. While an asset is on hold, it cannot be bought or sold.
 
-1. ERC721.sol: This is the implementation of the ERC-721 standard for non-fungible tokens.
-2. ReentrancyGuard.sol: This library helps prevent reentrancy attacks by managing reentrant calls.
+5. Asset Release: The contract owner can release an asset from holding, making it available for buying or selling.
 
-### State Variables
+### Data Structures
 
-The contract has several state variables to store essential data:
+1. Enum `assetStatus`: Represents the different statuses an asset can have, including OPEN, PAID, HELD, REFUNDED, and SOLD.
 
-1. `owner`: Stores the address of the contract owner.
-2. `Asset`: A struct representing an asset that users can buy and sell.
-3. `buyer`: A struct representing a buyer who shows interest in purchasing an asset.
-4. `user`: A struct representing a user's details, including age, national ID, phone number, and first name.
-5. `AssetIdExist`: A mapping to keep track of the existence of assets based on their IDs.
-6. `AssetExist`: A mapping to check if an asset with a given credential already exists.
-7. `refundedBuyers`: A mapping to store buyers who have been refunded.
-8. `buyerMap`: A mapping to associate asset IDs with their respective buyers.
-9. `usersDetail`: A mapping to store users' details based on their national ID.
-10. `verified`: A mapping to verify user addresses.
-11. `assetArray`: An array to store all the assets.
+2. Struct `buyer`: Contains information about the buyer of an asset, including their status, ID, amount paid, timestamp, payment confirmation, checked status, owner, and credential.
+
+3. Struct `Asset`: Represents an individual asset and includes fields like probe status, bought status, asset status, timestamp, price, ID, seller address, title, description, and credential.
+
+4. Struct `user`: Contains personal information of a user, including age, national ID, phone number, and first name. (Note: There is no apparent usage of this struct in the current contract).
 
 ### Events
 
-The contract emits several events to notify external applications about important state changes:
+1. `assetCreation`: Fired when a new asset is created, providing details about the asset's owner, ID, credential, timestamp, and price.
 
-1. `assetCreation`: Fired when a new asset is created.
-2. `assetTransfer`: Fired when an asset is transferred from one user to another.
-3. `sold`: Fired when an asset is sold and ownership is transferred to the buyer.
-4. `Action`: Fired when a buyer pays for an asset or performs some action related to it.
-5. `refundAction`: Fired when an asset is refunded or its refund action is initiated.
+2. `assetTransfer`: Fired when an asset is transferred from one address to another, providing details about the sender, recipient, token ID, credential, and timestamp.
+
+3. `Action`: General event used to indicate actions performed, such as buying an asset or sending Ether. It provides information about the buyer, seller, timestamp, amount, and payment status.
+
+4. `refundAction`: Fired when a refund is requested, providing information about the asset status before and after the refund request.
+
+### Modifiers
+
+1. `nonReentrant`: Ensures that a function cannot be executed recursively (prevents reentrancy attacks).
 
 ### Constructor
 
-The contract constructor takes two parameters: `_name` and `_symbol`. It initializes the ERC721 token with a name and a symbol. The `msg.sender` becomes the contract's owner.
+The contract constructor initializes the ERC721 token with a name and symbol and sets the contract deployer as the owner.
 
-### User Verification
+### Functions
 
-The contract includes functions for user verification:
+1. `createAsset`: Allows users to create a new asset with a title, description, credential, and price. The asset is associated with a unique NFT token ID, and the owner receives ownership of the newly created NFT.
 
-1. `_registerUser`: Allows users to register their details (age, national ID, phone number, and first name).
-2. `_verifyUser`: Verifies a user's details based on their national ID, phone number, age, and first name.
-3. `isVerified`: A modifier that requires the user to be verified before executing certain functions.
+2. `buyAsset`: Allows users to buy an asset by providing the asset ID and sending the required payment. The asset status changes to "PAID," and ownership transfers to the buyer.
 
-### Asset Management
+3. `refund`: Allows the buyer of an asset to request a refund. The contract owner has the authority to approve the refund, releasing the asset back to the original seller.
 
-The contract provides functions for asset creation, buying, and selling:
+4. `Probe`: Allows the contract owner to put an asset on hold, making it unavailable for buying or selling.
 
-1. `createAsset`: Allows users to create new assets with a title, description, credential, and price.
-2. `buyAsset`: Enables users to buy assets by providing the asset ID and the required payment.
-3. `refund`: Allows buyers to request a refund for an asset they purchased.
-4. `Probe`: Allows the contract owner to probe an asset, releasing it from being held and potentially refunding the buyer.
+5. `releaseAsset`: Allows the contract owner to release a held asset, making it available for buying or selling again.
 
-### Other Functions
+6. `confirm`: Allows the buyer of an asset to confirm the purchase after receiving the asset. The contract owner receives the payment, and the asset status changes to "SOLD."
 
-1. `releaseAsset`: Allows the contract owner to release an asset that was previously held, making it available for sale again.
-2. `getAssets`: Retrieves an array of all the assets currently available for sale.
-3. `getRefundedBuyers`: Retrieves information about buyers who have been refunded.
+7. `getAssets`: Allows users to get an array of all the assets created.
 
-## Usage
+8. `getRefundedBuyers`: Allows users to get details about refunded buyers for a specific asset ID.
 
-Users can interact with the contract to create assets, buy/sell assets, and request refunds. Before taking any actions, users need to be registered and verified.
+### Internal Function
 
-### Asset Creation
+1. `pay`: Internal function to transfer Ether to a specified address. It is used to handle payments between parties.
 
-1. Call the `_registerUser` function to register your details.
-2. Call the `_verifyUser` function to get verified based on your provided details.
-3. Once verified, call the `createAsset` function to create a new asset, providing the title, description, credential, and price.
+### Data Storage
 
-### Asset Buying
+1. `AssetIdExist`: A private mapping that keeps track of whether an asset with a specific ID exists.
 
-1. Make sure you are verified and have enough ether in your account to buy an asset.
-2. Call the `buyAsset` function, providing the asset ID as a parameter and sending the required payment in ether.
+2. `AssetExist`: A private mapping that keeps track of whether an asset with a specific credential exists.
 
-### Asset Refund
+3. `refundedBuyers`: A mapping that stores information about refunded buyers for a specific asset ID.
 
-1. Ensure you are the buyer of the asset and have the asset's ID.
-2. Call the `refund` function to initiate the refund process.
+4. `buyerMap`: A public mapping that stores buyer information for a specific asset ID.
 
-### Asset Probing and Releasing
+5. `assetArray`: An array that holds all the created assets.
 
-1. Only the contract owner can probe an asset using the `Probe` function. This action releases the asset from being held and refunds the buyer if the asset was in the "PAID" status.
-2. The owner can release an asset that was previously held using the `releaseAsset` function.
+6. `owner`: The address of the contract owner.
+
+To clone and run the EasyAsset smart contract on Celo Alfajores testnet, you'll need to follow these steps:
+
+### Prerequisites
+
+1. Make sure you have Node.js and npm (Node Package Manager) installed on your system.
+
+2. You will need an Ethereum wallet or a Celo wallet with some testnet CELO tokens for contract deployment and interactions. You can get testnet CELO tokens from the Celo Alfajores Faucet: https://faucet.celo.org/alfajores.
+
+### Clone the Repository
+
+1. Open a terminal or command prompt on your local machine.
+
+2. Clone the EasyAsset repository from GitHub:
+
+```bash
+git clone https://github.com/LamsyA/Asset-marketplace.git
+
+cd Asset-marketplace
+```
+
+### Configure the Project
+
+1. Install the project dependencies using npm:
+
+```bash
+npm install
+```
+
+
+
+
+### Testing
+
+The EasyAsset contract comes with test scripts that you can run to ensure its functionality is working correctly. To run the tests:
+
+```bash
+npx hardhat test
+```
+
+This will execute the test cases defined in the `test/EasyAsset.js` file and verify that the contract behaves as expected.
+
+## Conclusion
+
+By following these steps, you should now have the EasyAsset smart contract deployed and ready to be interacted with on the Celo Alfajores testnet. Make sure to thoroughly test your contract's functionalities.

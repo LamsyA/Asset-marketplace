@@ -15,10 +15,7 @@ module.exports = {
     // localhost: {
     //   chainId: 31337
     // },
-    mumbai: {
-      url: API_URL,
-      accounts: [`0x${PRIVATE_KEY}`],
-    },
+   
     Alfajores:{
       url: API_URL,
       accounts: [`0x${PRIVATE_KEY}`],
