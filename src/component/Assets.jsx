@@ -70,13 +70,13 @@ const AssetCard = ({ asset }) => (
             ) : asset.status == 1 ? (
               <small className="text-yellow-500"> PAID</small>
             ) : asset.status == 2 ? (
-              <small className="text-gray-500"> PROBE</small>
+              <small className="text-red-500"> PROBE</small>
             ) : asset.status == 3 ? (
               <small className="text-teal-500"> REVERTED</small>
             ) : asset.status == 4 ? (
               <small className="text-teal-500"> SOLD</small>
             ) : (
-              <small className="text-red-500"> HELD</small>
+              <small className="text-lime-400"> Loading</small>
             )}
           </div>
         </div>
