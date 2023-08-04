@@ -62,7 +62,7 @@ const AssetCard = ({ asset }) => (
           className="flex justify-between items-center flex-wrap mt-4 
                 mb-2 text-gray-500 font-bold uppercase"
         >
-          <small className="text-gray-500 text-sm"> Price: {asset.price} ETH</small>
+          <small className="text-gray-500 text-sm"> Price: {asset.price} CELO</small>
 
           <div>
             {asset.status == 0 ? (

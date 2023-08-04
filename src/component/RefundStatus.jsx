@@ -69,7 +69,7 @@ const RefundStatus = ({ refund, buyers }) => {
                   >
                     <small className="flex justify-start items-center space-x-2">
                       <FaEthereum />
-                      <span className="text-gray-700 font-medium">{refund?.amountpaid} ETH</span>
+                      <span className="text-gray-700 font-medium">{refund?.amountpaid} CELO</span>
                     </small>
                   </td>
                   <td

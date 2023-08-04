@@ -76,7 +76,7 @@ const BuyButton = ({ asset }) => {
               </div>
               <div className="flex flex-col text-gray-700">
                 <small className="text-sm">Asset Price</small>
-                <p className="text-xs font-medium">{asset?.price} ETH</p>
+                <p className="text-xs font-medium">{asset?.price} CELO</p>
               </div>
             </div>
           </div>

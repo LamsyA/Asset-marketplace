@@ -154,7 +154,7 @@ const MintAsset = () => {
               className="block w-full bg-transparent border-0 text-sm
                         text-slate-700 focus:outline-none focus:ring-0"
               type="number"
-              placeholder="Price (ETH)"
+              placeholder="Price (CELO))"
               name="price"
               onChange={(e) => setPrice(e.target.value)}
               value={price}

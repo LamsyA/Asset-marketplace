@@ -66,7 +66,7 @@ const Buyer = ({ buyers, asset }) => {
               >
                 <small className="flex justify-start items-center space-x-2">
                   <FaEthereum />
-                  <span className="text-gray-700 font-medium">{buyers?.amountpaid} ETH</span>
+                  <span className="text-gray-700 font-medium">{buyers?.amountpaid} CELO</span>
                 </small>
               </td>
               <td

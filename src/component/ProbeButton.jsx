@@ -74,7 +74,7 @@ const ProbeButton = ({ asset, buyers }) => {
               </div>
               <div className="flex flex-col text-gray-700">
                 <small className="text-sm">Asset Price</small>
-                <p className="text-xs font-medium text-red-700">{asset?.price} ETH</p>
+                <p className="text-xs font-medium text-red-700">{asset?.price} CELO</p>
               </div>
             </div>
           </div>

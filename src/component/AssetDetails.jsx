@@ -79,7 +79,7 @@ const AssetDetails = ({ asset, buyers }) => {
               </div>
             </div>
             <div className="flex justify-between items-center font-bold mt-2">
-              <small className="flex justify-start items-center">{asset?.price} ETH </small>
+              <small className="flex justify-start items-center">{asset?.price} CELO </small>
               <small className="flex justify-start items-center">
                 <FaEthereum />
                 <span>
