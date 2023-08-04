@@ -108,14 +108,16 @@ cd Asset-marketplace
 
 ### Configure the Project
 
-1. Install the project dependencies using npm:
+ Install the project dependencies using npm:
 
 ```bash
 npm install
 ```
 
-
-
+ Deploy the project to Alfajores testnet run:
+```bash
+npx hardhat run scripts/deploy.js --network Alfajores
+```
 
 ### Testing
 
